@@ -1,9 +1,7 @@
 import networkx as nx
 import numpy as np
-import read as rd
 # import cycle as cy
-import Path as pt
-
+from Subgraphs import Path as pt, read as rd
 
 raw = rd.read_samples()
 graphs =[]

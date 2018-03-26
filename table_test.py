@@ -1,11 +1,5 @@
 import networkx as nx
-import cycle as c
-import Path as p
-import star as s
-import f as f
-import h as h
-import d as d
-import matplotlib.pyplot as plt
+from Subgraphs import f as f, star as s, Path as p, h as h, cycle as c
 
 c3 = []
 c4 = []

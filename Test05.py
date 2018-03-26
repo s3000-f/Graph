@@ -1,9 +1,8 @@
 import networkx as nx
 import numpy as np
-import read as rd
-import matplotlib.pyplot as plt
+from Subgraphs import read as rd
 import energy as eg
-import cycle as cy
+
 # import Path as pt
 
 raw = rd.read_samples()

@@ -1,13 +1,7 @@
 import networkx as nx
 import numpy as np
-import cycle as c
-import Path as p
-import star as s
-import f as f
-import h as h
-import d as d
-import read as r
-import matplotlib.pyplot as plt
+from Subgraphs import f as f, d as d, star as s, Path as p, h as h, read as r, cycle as c
+
 name = [20, 24, 26, 28, 30, 32, 36, 50, 60, 76, 80]
 c3 = []
 c4 = []

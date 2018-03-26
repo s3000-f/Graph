@@ -1,8 +1,6 @@
 import networkx as nx
 import numpy as np
-import read as rd
-import star as st
-
+from Subgraphs import star as st, read as rd
 
 raw = rd.read_samples()
 graphs = []
