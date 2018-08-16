@@ -31,9 +31,11 @@ def path_count(graph, max_len):
     return cnt
 
 
-g = nx.Graph()
-g.add_path(range(0,4))
-
-
-p = path_count(g, 5)
-print(p)
+# g = nx.Graph()
+# g.add_path(range(0,m4))
+# # asd = list(nx.all_simple_paths(g, 0, 3, 3))
+# # print(asd)
+#
+#
+# p = path_count(g, 3)
+# print(p)

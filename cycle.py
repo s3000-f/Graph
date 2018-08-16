@@ -1,4 +1,4 @@
-import networkx as nx
+
 def dfs(graph, marked, n, vert, start, count, V):
     # mark the vertex vert as visited
     marked[vert] = True
@@ -40,13 +40,12 @@ def dfs(graph, marked, n, vert, start, count, V):
 # n: size of cycle
 # V: size of graph
 def count_cycles(graph, n, v):
-    g = nx.to_numpy_matrix(graph).tolist()
     # all vertex are marked un-visited intially.
     marked = [False] * v
     # Searching for cycle by using v-n+1 vertices
     count = 0
     for i in range(v - (n - 1)):
-        count = dfs(g, marked, n - 1, i, i, count, v)
+        count = dfs(graph, marked, n - 1, i, i, count, v)
         # ith vertex is marked as visited and
         # will not be visited again.
         marked[i] = True

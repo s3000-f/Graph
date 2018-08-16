@@ -1,18 +1,20 @@
 import networkx as nx
-def dfs(graph, marked, n, vert, start, count, V):
+
+
+def dfs(graph: nx.Graph, marked, n, vert, ew, start, count, V):
     # mark the vertex vert as visited
-    marked[vert] = True
+    marked[ew] += 1
 
     # if the path of length (n-1) is found
     if n == 0:
 
         # mark vert as un-visited to make
         # it usable again.
-        marked[vert] = False
+        marked[ew] -= 1
 
         # Check if vertex vert can end with
         # vertex start
-        if graph[vert][start] == 1:
+        if start in graph[vert] == 1:
             count = count + 1
             return count
         else:
@@ -21,15 +23,15 @@ def dfs(graph, marked, n, vert, start, count, V):
     # For searching every possible path of
     # length (n-1)
     for i in range(V):
-        if marked[i] is False and graph[vert][i] == 1:
+        if i in graph[vert]:
             # DFS for searching path by decreasing
             # length by 1
 
-            count = dfs(graph, marked, n - 1, i, start, count, V)
+            count = dfs(graph, marked, n - 1, i, graph[vert][i]['w'], start, count, V)
 
     # marking vert as unvisited to make it
     # usable again.
-    marked[vert] = False
+    marked[vert] -= 1
     return count
 
 
@@ -39,16 +41,21 @@ def dfs(graph, marked, n, vert, start, count, V):
 # graph: Adjacency Matrix of graph
 # n: size of cycle
 # V: size of graph
-def count_cycles(graph, n, v):
-    g = nx.to_numpy_matrix(graph).tolist()
+def count_cycles(graph: nx.Graph, n, v):
     # all vertex are marked un-visited intially.
-    marked = [False] * v
+    marked = [0] * v
     # Searching for cycle by using v-n+1 vertices
     count = 0
-    for i in range(v - (n - 1)):
-        count = dfs(g, marked, n - 1, i, i, count, v)
+    for i in range(v):
+        count = dfs(graph, marked, n - 1, i, 0, i, count, v)
         # ith vertex is marked as visited and
         # will not be visited again.
-        marked[i] = True
+        marked[i] += 1
     del marked
     return int(count / 2)
+
+
+g = nx.Graph()
+g.add_edge(0, 1, w=0)
+c = count_cycles(g, 8, 2)
+print(c)

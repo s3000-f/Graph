@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def internal(graph, v):
-    if sum(graph[v]) < 3:
+    if sum(graph[v]) < 4:
         return 0
     cnt = 0
     for i, val in enumerate(graph[v]):
@@ -12,12 +12,11 @@ def internal(graph, v):
                 if val2 == 1 and i != j:
                     for k, val3 in enumerate(graph[v]):
                         if val3 == 1 and k != i and k != j:
-                            for l, val4 in enumerate(graph[k]):
-                                if val4 == 1:
-                                    for m, val5 in enumerate(graph[j]):
-                                        if val5 == 1 and l == m and l != v and l != i:
-                                            cnt += 1
-    return cnt / 2
+                            for n, val4 in enumerate(graph[v]):
+                                if val4 == 1 and n != i and n != j and n != k:
+                                    if graph[i][j] == 1 and graph[k][n] == 1:
+                                        cnt += 1
+    return cnt / 8
 
 
 def count_f(graph, size):
@@ -28,25 +27,24 @@ def count_f(graph, size):
         sums += internal(g, i)
     return sums
 
-# g = nx.Graph()
-# g.add_nodes_from(range(0,5))
-# g.add_edge(0,1)
-# g.add_edge(1,2)
-# g.add_edge(2,3)
-# g.add_edge(3,0)
-# g.add_edge(0,4)
-# g.add_edge(0,5)
-# g.add_edge(0,6)
-# g.add_edge(7,6)
-# g.add_edge(1,7)
-# # g.add_edge(8,0)
-#
-#
-# print(count_f(g, 8))
-#
-# nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
-# plt.draw()
-# plt.show()
+g = nx.Graph()
+g.add_edge(0,1)
+g.add_edge(1,3)
+g.add_edge(4,3)
+g.add_edge(3,0)
+g.add_edge(0,4)
+g.add_edge(0,5)
+g.add_edge(0,6)
+g.add_edge(4,6)
+g.add_edge(1,6)
+# g.add_edge(8,0)
+
+
+print(count_f(g, 8))
+
+nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
+plt.draw()
+plt.show()
 
 
 # g = nx.Graph()
