@@ -11,20 +11,22 @@ def internal(graph, v):
             for j, val2 in enumerate(graph[v]):
                 if val2 == 1 and i != j:
                     for k, val3 in enumerate(graph[v]):
-                        if val3 == 1 and k != i and k != j:
-                            if graph[i][j] == 1 and graph[j][k] == 1:
-                                cnt += 1
+                        if val3 == 1 and k != i and k != j and graph[k][j] == 1:
+                            for l, val4 in enumerate(graph[k]):
+                                if val4 == 1:
+                                    for m, val5 in enumerate(graph[j]):
+                                        if val5 == 1 and l == m and l != v and l != i:
+                                            cnt += 1
     return cnt / 2
 
 
-# graph: NetworkX graph
-def count_d(graph, size):
+def count_g19(graph):
     g = nx.to_numpy_matrix(graph).tolist()
     g = [[int(j) for j in i] for i in g]
     sums = 0
     for i in range(0, len(g)):
         sums += internal(g, i)
-    return sums / 2
+    return sums
 
 # g = nx.Graph()
 # g.add_nodes_from(range(0,5))
@@ -40,7 +42,7 @@ def count_d(graph, size):
 # # g.add_edge(8,0)
 #
 #
-# print(count_d(g, 8))
+# print(count_f(g, 8))
 #
 # nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
 # plt.draw()
@@ -56,7 +58,7 @@ def count_d(graph, size):
 # g.add_edge(4,3)
 # g.add_edge(4,5)
 # g.add_edge(3,5)
-# print( count_d(g, 5))
+# print( count_f(g, 5))
 #
 # nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
 # plt.draw()
