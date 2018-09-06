@@ -24,7 +24,7 @@ def count_g28(graph):
     g = nx.to_numpy_matrix(graph).tolist()
     g = [[int(j) for j in i] for i in g]
     sums = internal(g)
-    return sums / 4
+    return sums / 12
 
 # g = nx.Graph()
 # g.add_nodes_from(range(0,5))

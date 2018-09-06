@@ -12,10 +12,9 @@ def internal(graph):
                     for m in range(0, siz):
                         if (i != j and i != k and i != l and i != m and j != k and j != l
                                 and j != m and k != l and k != m and l != m):
-                            if (graph[i][j] == 1 and graph[i][j] == 1 and graph[j][k] == 1
+                            if (graph[i][j] == 1 and graph[i][k] == 1 and graph[j][k] == 1
                                     and graph[k][l] == 1 and graph[k][m] == 1 and graph[l][m] == 1):
                                 cnt += 1
-
     return cnt / 2
 
 

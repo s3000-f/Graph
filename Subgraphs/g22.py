@@ -16,7 +16,6 @@ def internal(graph):
                                     graph[j][l] == 1 and graph[j][m] == 1 and graph[k][l] == 1
                                     and graph[k][m] == 1):
                                 cnt += 1
-
     return cnt
 
 
@@ -24,7 +23,7 @@ def count_g22(graph):
     g = nx.to_numpy_matrix(graph).tolist()
     g = [[int(j) for j in i] for i in g]
     sums = internal(g)
-    return sums / 6
+    return sums / 12
 
 # g = nx.Graph()
 # g.add_nodes_from(range(0,5))
