@@ -1,4 +1,7 @@
 from math import sqrt
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def read_graph(name):
@@ -26,8 +29,16 @@ def read_graph(name):
 
 def read_samples():
     ret = []
-    for i in range(1,4):
-        for j in range(1,5):
-            name = "Matrises/"+str(i)+"/"+str(j)+".txt"
+    for i in range(1, 4):
+        for j in range(1, 5):
+            name = "Matrises/" + str(i) + "/" + str(j) + ".txt"
             ret.append(read_graph(name))
     return ret
+
+
+# r = read_graph("C:/Users/S3000/Desktop/data/TD/td1.txt")
+# g = nx.from_numpy_matrix(np.matrix(r))
+
+# nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
+# plt.draw()
+# plt.show()

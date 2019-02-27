@@ -1,9 +1,11 @@
 import networkx as nx
+import numpy as np
 import matplotlib.pyplot as plt
 
 
 def internal(graph):
     siz = len(graph)
+    deletions = set()
     cnt = 0
     for i in range(0, siz):
         for j in range(0, siz):
@@ -16,14 +18,35 @@ def internal(graph):
                                     graph[i][m] == 1 and graph[j][k] == 1 and graph[j][l] == 1 and
                                     graph[k][m] == 1 and graph[l][m] == 1):
                                 cnt += 1
-    return cnt
+                                deletions.add((i, j))
+                                deletions.add((j, i))
+                                deletions.add((i, k))
+                                deletions.add((k, i))
+                                deletions.add((i, l))
+                                deletions.add((l, i))
+                                deletions.add((i, m))
+                                deletions.add((m, i))
+                                deletions.add((k, j))
+                                deletions.add((j, k))
+                                deletions.add((l, j))
+                                deletions.add((j, l))
+                                deletions.add((k, m))
+                                deletions.add((m, k))
+                                deletions.add((l, m))
+                                deletions.add((m, l))
+
+    return cnt, deletions
 
 
 def count_g27(graph):
-    g = nx.to_numpy_matrix(graph).tolist()
-    g = [[int(j) for j in i] for i in g]
-    sums = internal(g)
-    return sums / 8
+    in_g = nx.to_numpy_matrix(graph).tolist()
+    in_g = [[int(j) for j in i] for i in in_g]
+    sums, deletions = internal(in_g)
+    for (i, j) in deletions:
+        in_g[i][j] = 0
+    in_g = np.matrix(in_g)
+    in_g = nx.from_numpy_matrix(in_g)
+    return sums / 8, in_g
 
 # g = nx.Graph()
 # g.add_nodes_from(range(0,5))

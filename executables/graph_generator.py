@@ -182,13 +182,13 @@ def sn4pp(n):
 
 gr = deterministic_sierpinski(nx.Graph(), 3, -1, -1, -1, [0])
 # gr = sn4pp(2)
-npm = nx.to_numpy_array(gr)
-data = ""
-for dat in npm:
-    for k in dat:
-        data += str(k).replace(".0", "")
-        data += ", "
-    data += "\n"
+# npm = nx.to_numpy_array(gr)
+# data = ""
+# for dat in npm:
+#     for k in dat:
+#         data += str(k).replace(".0", "")
+#         data += ", "
+#     data += "\n"
 # data = str(nx.to_numpy_array(gr))
 # data = data.replace("[", "")
 # data = data.replace("\n", "")
@@ -197,7 +197,12 @@ for dat in npm:
 # data = data.replace("  ", " ")
 # data = data.replace("  ", " ")
 # data = data.replace("  ","\n")
-print(data)
+# print(data)
+g = sn4p(5)
+nx.draw_networkx(g, with_labels=True, edge_color='red', node_color='blue', node_size=9)
+plt.draw()
+plt.show()
 nx.draw_networkx(gr, with_labels=True, edge_color='red', node_color='blue', node_size=9)
 plt.draw()
 plt.show()
+

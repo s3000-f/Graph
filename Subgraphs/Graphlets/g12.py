@@ -1,10 +1,12 @@
 import networkx as nx
+import numpy as np
 import matplotlib.pyplot as plt
 
 
 def internal(graph):
     siz = len(graph)
     cnt = 0
+    deletions = set()
     for i in range(0, siz):
         for j in range(0, siz):
             for k in range(0, siz):
@@ -12,18 +14,31 @@ def internal(graph):
                     for m in range(0, siz):
                         if (i != j and i != k and i != l and i != m and j != k
                                 and j != l and j != m and k != l and k != m and l != m):
-                            if (graph[i][j] == 1 and graph[i][k] == 1 and graph[j][l] == 1 and
-                                    graph[j][k] == 1 and graph[k][m] == 1 and graph[l][m] == 1):
+                            if (graph[i][j] == 1 and graph[i][l] == 1 and
+                                    graph[i][k] == 1 and graph[k][l] == 1 and graph[m][l] == 1):
                                 cnt += 1
+                                deletions.add((i, j))
+                                deletions.add((j, i))
+                                deletions.add((i, l))
+                                deletions.add((l, i))
+                                deletions.add((i, k))
+                                deletions.add((k, i))
+                                deletions.add((l, m))
+                                deletions.add((m, l))
+                                deletions.add((k, l))
+                                deletions.add((l, k))
+    return cnt, deletions
 
-    return cnt
 
-
-def count_g21(graph):
-    g = nx.to_numpy_matrix(graph).tolist()
-    g = [[int(j) for j in i] for i in g]
-    sums = internal(g)
-    return sums / 2
+def count_g12(graph):
+    in_g = nx.to_numpy_matrix(graph).tolist()
+    in_g = [[int(j) for j in i] for i in in_g]
+    sums, deletions = internal(in_g)
+    for (i, j) in deletions:
+        in_g[i][j] = 0
+    in_g = np.matrix(in_g)
+    in_g = nx.from_numpy_matrix(in_g)
+    return sums / 2, in_g
 
 # g = nx.Graph()
 # g.add_nodes_from(range(0,5))
